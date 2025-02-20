@@ -144,7 +144,7 @@ public static class DatabaseSeeder
             new Comic
             {
                 Title = "Los 4 Fantásticos: El regreso de Galactus",
-                ImageUrl = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8GDULOA2-bVviviItOLLNTAWPPWf3b6jnXXdrZOHVs8zpXbvP0um_nxPjVqNT_7UW5UAeh1KWy4SPf5cUnG5Qb9zXqURsh1hX6VGWQxZJ8dNkoph7fKHlRVIpk5zK/s1600/Deadpool+-+La+guerra+de+Wade+Wilson+%25281%2529.jpg",
+                ImageUrl = "https://img2.rtve.es/i/?w=1600&i=1471187611866.jpg",
                 Description = "El regreso de Galactus pone a prueba a los 4 Fantasticos, quienes deben enfrentarse a la amenaza cosmica la destrucción.",
                 Author = "Stan Lee",
                 Reference = "FF01",
@@ -207,7 +207,7 @@ public static class DatabaseSeeder
             new Comic
             {
                 Title = "Los 4 Fantásticos: El regreso de Galactus",
-                ImageUrl = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8GDULOA2-bVviviItOLLNTAWPPWf3b6jnXXdrZOHVs8zpXbvP0um_nxPjVqNT_7UW5UAeh1KWy4SPf5cUnG5Qb9zXqURsh1hX6VGWQxZJ8dNkoph7fKHlRVIpk5zK/s1600/Deadpool+-+La+guerra+de+Wade+Wilson+%25281%2529.jpg",
+                ImageUrl ="https://img2.rtve.es/i/?w=1600&i=1471187611866.jpg",
                 Description = "El regreso de Galactus pone a prueba a los 4 Fantásticos, quienes deben enfrentarse a la amenaza cósmica destrucción.",
                 Author = "Stan Lee",
                 Reference = "FF01",
@@ -262,7 +262,7 @@ public static class DatabaseSeeder
             new Comic
             {
                 Title = "Los 4 Fantásticos: El regreso de Galactus",
-                ImageUrl = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8GDULOA2-bVviviItOLLNTAWPPWf3b6jnXXdrZOHVs8zpXbvP0um_nxPjVqNT_7UW5UAeh1KWy4SPf5cUnG5Qb9zXqURsh1hX6VGWQxZJ8dNkoph7fKHlRVIpk5zK/s1600/Deadpool+-+La+guerra+de+Wade+Wilson+%25281%2529.jpg",
+                ImageUrl = "https://img2.rtve.es/i/?w=1600&i=1471187611866.jpg",
                 Description = "El regreso de Galactus pone a prueba a los 4 Fantásticos, quienes deben enfrentarse a la amenaza cósmica destrucción.",
                 Author = "Stan Lee",
                 Reference = "FF01",

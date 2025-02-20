@@ -2,6 +2,7 @@ using ApiColegio.Application.Extensions;
 using ApiMarvel.Domain.Models.Users;
 using ApiMarvel.Infrastructure.Context;
 using ApiMarvel.Infrastructure.Extensions;
+using ApiMarvel.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -72,6 +73,25 @@ builder.Services.AddEndpointsApiExplorer();
 
 
 var app = builder.Build();
+
+// Scope fot seeding database
+try
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        await DatabaseSeeder.SeedAsync(context);
+
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogInformation("Base de datos inicializada y datos sembrados correctamente.");
+    }
+}
+catch (Exception ex)
+{
+    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "Error al inicializar la base de datos.");
+    throw;
+}
 
 
 app.UseHttpsRedirection();

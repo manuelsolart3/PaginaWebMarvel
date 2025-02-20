@@ -23,7 +23,6 @@ public class ComicConfiguration : IEntityTypeConfiguration<Comic>
 
         builder.Property(c => c.Reference)
             .HasMaxLength(50);
-        builder.HasIndex(c => c.Reference).IsUnique();
 
 
         builder.Property(c => c.Pages)

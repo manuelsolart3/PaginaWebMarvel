@@ -1,5 +1,7 @@
-﻿using ApiMarvel.Application.Features.User.Commands.CreateUser;
+﻿using ApiMarvel.Application.Features.User.Commands.AddFavoriteComic;
+using ApiMarvel.Application.Features.User.Commands.CreateUser;
 using ApiMarvel.Application.Features.User.Commands.LoginUser;
+using ApiMarvel.Application.Features.User.Commands.RemoveFavoriteComic;
 using ApiMarvel.Application.Features.User.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -28,7 +30,7 @@ public class UserController : ControllerBase
         var result = await _mediator.Send(command);
         if (result.IsSuccess)
         {
-            return Ok("User Created Succesfuly");
+            return Ok();
         }
         else
         {
@@ -62,5 +64,27 @@ public class UserController : ControllerBase
         }
     }
 
+    [HttpPost("favorites")]
+    public async Task<IActionResult> AddFavoriteComic([FromBody] AddFavoriteComicCommand command, CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(command, cancellationToken);
+
+        if (!result.IsSuccess)
+            return BadRequest(result.Error); 
+
+        return Ok(result); 
+    }
+
+    [HttpDelete("favorites/{id}")]
+    public async Task<IActionResult> RemoveFavoriteComic(Guid id, CancellationToken cancellationToken)
+    {
+        var command = new RemoveFavoriteComicCommand(id);
+        var result = await _mediator.Send(command, cancellationToken);
+
+        if (result.IsFailure)
+            return BadRequest(result.Error); 
+
+        return Ok();     
+    }
 
 }

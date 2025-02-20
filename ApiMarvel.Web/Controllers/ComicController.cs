@@ -1,10 +1,12 @@
 ﻿using ApiMarvel.Application.Features.Comic.Queries.GetAll;
 using ApiMarvel.Application.Features.Comic.Queries.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiMarvel.Web.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class ComicController : ControllerBase

@@ -1,5 +1,6 @@
 ﻿using ApiMarvel.Application.Dtos;
 using ApiMarvel.Domain.Models.Comics;
+using ApiMarvel.Domain.Models.Users;
 using AutoMapper;
 
 namespace ApiMarvel.Application.Mappers;

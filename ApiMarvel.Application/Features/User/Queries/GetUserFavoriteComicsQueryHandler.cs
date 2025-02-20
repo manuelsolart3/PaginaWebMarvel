@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiMarvel.Application.Features.User.Queries;
 
-public class GetUserFavoriteComicsHandler : IRequestHandler<GetUserFavoriteComicsQuery, Result<Pageable<ComicPreviewDto>>>
+public class GetUserFavoriteComicsHandler : IRequestHandler<GetUserFavoriteComicsQuery, Result<Pageable<FavoriteComicPreviewDto>>>
 {
     private readonly IUserFavoriteComicRepository _userFavoriteComicRepository;
     private readonly IMapper _mapper;
@@ -26,19 +26,19 @@ public class GetUserFavoriteComicsHandler : IRequestHandler<GetUserFavoriteComic
         _currentUserService = currentUserService;
     }
 
-    public async Task<Result<Pageable<ComicPreviewDto>>> Handle(GetUserFavoriteComicsQuery request, CancellationToken cancellationToken)
+    public async Task<Result<Pageable<FavoriteComicPreviewDto>>> Handle(GetUserFavoriteComicsQuery request, CancellationToken cancellationToken)
     {
         var userId = _currentUserService.UserId;
 
         if (string.IsNullOrEmpty(userId))
-            return Result.Failure<Pageable<ComicPreviewDto>>(UserError.UserNotFound);
+            return Result.Failure<Pageable<FavoriteComicPreviewDto>>(UserError.UserNotFound);
 
         var favoriteComics = await FetchData((userId), request.Page, request.PageSize);
 
         return Result.Success(favoriteComics);
     }
 
-    private async Task<Pageable<ComicPreviewDto>> FetchData(string userId, int page, int pageSize)
+    private async Task<Pageable<FavoriteComicPreviewDto>> FetchData(string userId, int page, int pageSize)
     {
         int start = pageSize * (page - 1);
 
@@ -53,9 +53,9 @@ public class GetUserFavoriteComicsHandler : IRequestHandler<GetUserFavoriteComic
             .Take(pageSize)
             .ToListAsync();
 
-        List<ComicPreviewDto> favoriteComicDtos = _mapper.Map<List<ComicPreviewDto>>(favoriteComics.Select(ufc => ufc.Comic));
+        List<FavoriteComicPreviewDto> favoriteComicDtos = _mapper.Map<List<FavoriteComicPreviewDto>>(favoriteComics);
 
-        return new Pageable<ComicPreviewDto>
+        return new Pageable<FavoriteComicPreviewDto>
         {
             List = favoriteComicDtos,
             Count = totalCount

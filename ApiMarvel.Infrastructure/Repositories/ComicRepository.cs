@@ -20,29 +20,26 @@ public class ComicRepository : IComicRepository
         return await _context.Comics.ToListAsync();
     }
 
-    public async Task<Comic> GetByIdAsync(Guid id)
+    public async Task<Comic> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         return await _context.Comics.FindAsync(id);
     }
 
-    public async Task AddAsync(Comic comic)
+    public async Task AddAsync(Comic comic, CancellationToken cancellationToken)
     {
         await _context.Comics.AddAsync(comic);
     }
 
-    public void UpdateAsync(Comic comic)
+    public void UpdateAsync(Comic comic, CancellationToken cancellationToken)
     {
         _context.Comics.Update(comic);
     }
 
-    public void Delete(Guid id)
+    public async Task DeleteAsync(Comic comic, CancellationToken cancellationToken)
     {
-        var comic = _context.Comics.Find(id);
-        if (comic != null)
-        {
-            _context.Comics.Remove(comic);
-        }
+        _context.Comics.Remove(comic);
     }
+
     public IQueryable<Comic> Queryable()
     {
        return _context.Comics.AsQueryable();

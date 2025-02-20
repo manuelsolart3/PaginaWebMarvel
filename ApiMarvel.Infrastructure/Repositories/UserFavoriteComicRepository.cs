@@ -26,4 +26,25 @@ public class UserFavoriteComicRepository : IUserFavoriteComicRepository
             .Include(ufc => ufc.Comic)
             .ToListAsync();
     }
+    public async Task AddAsync(UserFavoriteComic userFavoriteComic, CancellationToken cancellationToken)
+    {
+        await _context.UserFavoriteComics.AddAsync(userFavoriteComic);
+    }
+    public async Task<bool> ExistsAsync(string userId, Guid comicId, CancellationToken cancellationToken)
+    {
+        return await _context.Set<UserFavoriteComic>()
+            .AnyAsync(ufc => ufc.UserId == userId && ufc.ComicId == comicId, cancellationToken);
+    }
+    public async Task<UserFavoriteComic?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    {
+        return await _context.UserFavoriteComics
+            .FirstOrDefaultAsync(ufc => ufc.Id == id, cancellationToken);
+    }
+    public async Task DeleteAsync(UserFavoriteComic entity, CancellationToken cancellationToken)
+    {
+        _context.UserFavoriteComics.Remove(entity);
+        await _context.SaveChangesAsync(cancellationToken);
+    }
+
+
 }

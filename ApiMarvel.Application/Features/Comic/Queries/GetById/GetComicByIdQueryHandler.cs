@@ -20,7 +20,7 @@ public class GetComicByIdQueryHandler : IQueryHandler<GetComicByIdQuery, ComicDe
 
     public async Task<Result<ComicDetailsDto>> Handle(GetComicByIdQuery request, CancellationToken cancellationToken)
     {
-        var comic = await FetchData(request.Id);
+        var comic = await FetchData(request.Id, cancellationToken);
 
         if (comic is null)
         {
@@ -30,9 +30,9 @@ public class GetComicByIdQueryHandler : IQueryHandler<GetComicByIdQuery, ComicDe
         return Result.Success(comic);
     }
 
-    private async Task<ComicDetailsDto?> FetchData(Guid id)
+    private async Task<ComicDetailsDto?> FetchData(Guid id, CancellationToken cancellationToken)
     {
-        var comic = await _comicRepository.GetByIdAsync(id);
+        var comic = await _comicRepository.GetByIdAsync(id,cancellationToken);
 
         return comic is not null ? _mapper.Map<ComicDetailsDto>(comic) : null;
     }

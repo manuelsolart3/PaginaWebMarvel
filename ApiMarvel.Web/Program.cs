@@ -50,7 +50,19 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
-    
+
+//CORS polices
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMultipleOrigins", policy =>
+    {
+        policy.WithOrigins(
+            "http://localhost:5173")        
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 // 4. Authorization
 builder.Services.AddAuthorization();
 
@@ -64,7 +76,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseCors("AllowMultipleOrigins");
 app.UseRouting();
 app.MapControllers();
 
